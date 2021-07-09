@@ -1,4 +1,4 @@
-//	Q:- Write a c program find all factors of  number.
+//  Q:- Write a c program find all factors of  number.
 
 #include<stdio.h>
 #include<conio.h>
