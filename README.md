@@ -1,2 +1,116 @@
 # C-Language
 Simple, short beginners friendly C-Programs.
+
+
+
+
+Q.1 ) Create a Simple Application Which Shows Life Cycle of Activity.
+
+
+1) activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+2 ) MainActivity.java
+package com.example.lifecycle;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.d("lifecycle","onCreate invoked");
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("lifecycle","onStart invoked");
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("lifecycle","onResume invoked");
+    }
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+        Log.d("lifecycle","onPause invoked");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("lifecycle","onStop invoked");
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("lifecycle","onRestart invoked");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("lifecycle","onDestroy invoked");
+    }
+}
+
+
+
+
+
+
+
+3=> write a c program that redirect standard outputs to a file output.txt use dup and open system call 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int fd;
+    char buffer[256];
+
+    // Open a file for writing
+    fd = open("output.txt", O_WRONLY | O_CREAT, 0644);
+
+    if (fd == -1) {
+        perror("open");
+        exit(1);
+    }
+
+    // Redirect standard output to the file
+    if (dup2(fd, STDOUT_FILENO) == -1) {
+        perror("dup2");
+        exit(1);
+    }
+
+    // Print some output to the file
+    printf("This is a test of stdout redirection.\n");
+
+    // Close the file
+    close(fd);
+
+    return 0;
+}
